@@ -22,11 +22,6 @@ public class RequestTest : MonoBehaviour
         assistant = FindObjectOfType<Assistant>();
     }
 
-    private void Update()
-    {
-
-    }
-
     public void Request()
     {
         if(input.text == null || input.text == "")
@@ -41,6 +36,9 @@ public class RequestTest : MonoBehaviour
 
     IEnumerator PostAPIRequest()
     {
+        //Animation
+        assistant.StartThinking();
+
         // Create a Data object and populate it with the desired values
         Data data = new Data();
         data.message = input.text;
@@ -63,6 +61,8 @@ public class RequestTest : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
+            assistant.StopThinking();
+
             string savePath = Path.Combine(Application.streamingAssetsPath, "voice.wav");
             File.WriteAllBytes(savePath, request.downloadHandler.data);
             Debug.Log("Voice file downloaded and saved at " + savePath);

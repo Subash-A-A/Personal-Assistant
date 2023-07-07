@@ -362,7 +362,7 @@ Camera:
   far clip plane: 1000
   field of view: 40
   orthographic: 1
-  orthographic size: 0.25
+  orthographic size: 0.3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1314,25 +1314,25 @@ MonoBehaviour:
   blendShapes:
   - phoneme: A
     index: 4
-    maxWeight: 1
+    maxWeight: 0.69
   - phoneme: I
     index: 5
-    maxWeight: 1
+    maxWeight: 0.69
   - phoneme: U
     index: 6
-    maxWeight: 1
+    maxWeight: 0.69
   - phoneme: E
     index: 7
-    maxWeight: 1
+    maxWeight: 0.69
   - phoneme: O
     index: 8
-    maxWeight: 1
+    maxWeight: 0.69
   - phoneme: N
     index: 16
-    maxWeight: 1
+    maxWeight: 0.69
   - phoneme: '-'
     index: 16
-    maxWeight: 1
+    maxWeight: 0.69
   minVolume: -2.5
   maxVolume: -1.5
   smoothness: 0.05
@@ -16139,7 +16139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b0e49b68d574b4088c825239017cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerID: 66
+  speakerID: 20
 --- !u!114 &7495358341551797363
 MonoBehaviour:
   m_ObjectHideFlags: 0

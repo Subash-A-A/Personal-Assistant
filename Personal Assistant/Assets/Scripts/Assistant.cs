@@ -7,9 +7,11 @@ public class Assistant : MonoBehaviour
 {
     [SerializeField] private int speakerID = 20;
     private AudioSource audioSource;
+    private Animator anim;
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
     public IEnumerator GetAudioFile()
@@ -36,5 +38,15 @@ public class Assistant : MonoBehaviour
     public int GetSpeakerID()
     {
         return speakerID;
+    }
+
+    public void StartThinking()
+    {
+        anim.SetBool("isThinking", true);
+    }
+
+    public void StopThinking()
+    {
+        anim.SetBool("isThinking", false);
     }
 }
