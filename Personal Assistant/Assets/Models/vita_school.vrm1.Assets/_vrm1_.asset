@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88684271e27adb843b6570957c9e7637, type: 3}
+  m_Name: _vrm1_
+  m_EditorClassIdentifier: 
+  m_prefab: {fileID: -1728013695380148634, guid: 591cdd68bb2b3df49b39194a4725d711,
+    type: 3}
+  Meta:
+    Name: "\u30F4\u30A3\u30FC\u30BF_WSU"
+    Version: 
+    Authors:
+    - 
+    CopyrightInformation: 
+    ContactInformation: 
+    References:
+    - 
+    ThirdPartyLicenses: 
+    Thumbnail: {fileID: 2800000, guid: 45c82df6ea9671a4b945495c6f1164e8, type: 3}
+    AvatarPermission: 2
+    ViolentUsage: 1
+    SexualUsage: 1
+    CommercialUsage: 1
+    PoliticalOrReligiousUsage: 0
+    AntisocialOrHateUsage: 0
+    CreditNotation: 0
+    Redistribution: 0
+    Modification: 0
+    OtherLicenseUrl: https://hub.vroid.com/license?allowed_to_use_user=everyone&characterization_allowed_user=everyone&corporate_commercial_use=allow&credit=unnecessary&modification=allow&personal_commercial_use=profit&redistribution=allow&sexual_expression=allow&version=1&violent_expression=allow
+  Expression:
+    Happy: {fileID: 11400000, guid: 0930b0d65cea66743a82286c8139044a, type: 2}
+    Angry: {fileID: 11400000, guid: 4e796e8e366230349a954b3f059e247c, type: 2}
+    Sad: {fileID: 11400000, guid: 1a7a57e1b3a44a04fa6f077deeadfdae, type: 2}
+    Relaxed: {fileID: 11400000, guid: c11b8f56142f5184282053eba1182e94, type: 2}
+    Surprised: {fileID: 11400000, guid: ca247fa9ef044824294bc0e9067a4f6e, type: 2}
+    Aa: {fileID: 11400000, guid: 4a552a20b4f379a41b2b05755b832169, type: 2}
+    Ih: {fileID: 11400000, guid: 162be4d194c183d448d177e26ad0d06a, type: 2}
+    Ou: {fileID: 11400000, guid: 9124e101cfe69104297c3b16b1999785, type: 2}
+    Ee: {fileID: 11400000, guid: 99c0880239a2c7346b079944b4bc05b1, type: 2}
+    Oh: {fileID: 11400000, guid: 2dcec9f5dc677f34a8afdb685920bac8, type: 2}
+    Blink: {fileID: 11400000, guid: 32f2cb10087b1d443a261e9534cb7b09, type: 2}
+    BlinkLeft: {fileID: 11400000, guid: 034b542d0ebaa744fb84c53423ea7ed6, type: 2}
+    BlinkRight: {fileID: 11400000, guid: 3f14703ac7d92b741a040fc2c01b49fd, type: 2}
+    LookUp: {fileID: 11400000, guid: 4fc96f8137574914cb5354b9744ae1e3, type: 2}
+    LookDown: {fileID: 11400000, guid: 09f1907ea7368704e8deb05ea07e07fc, type: 2}
+    LookLeft: {fileID: 11400000, guid: abf2d2cb662877d419d4f0297a1be71b, type: 2}
+    LookRight: {fileID: 11400000, guid: 84f521b3e1c273e44b692b5f2ba53122, type: 2}
+    Neutral: {fileID: 11400000, guid: 7f46c3308f23825418e83b430f54be8b, type: 2}
+    CustomClips:
+    - {fileID: 11400000, guid: 2e2cf37a10f73f842b29eca556c51155, type: 2}
+  LookAt:
+    OffsetFromHead: {x: -0, y: 0.06, z: 0}
+    LookAtType: 0
+    HorizontalOuter:
+      CurveXRangeDegree: 90
+      CurveYRangeDegree: 14.423963
+    HorizontalInner:
+      CurveXRangeDegree: 90
+      CurveYRangeDegree: 8.89401
+    VerticalDown:
+      CurveXRangeDegree: 90
+      CurveYRangeDegree: 15.990784
+    VerticalUp:
+      CurveXRangeDegree: 90
+      CurveYRangeDegree: 15.990784
+  FirstPerson:
+    Renderers:
+    - Renderer: Face
+      FirstPersonFlag: 0
+    - Renderer: Body
+      FirstPersonFlag: 0
+    - Renderer: Hairs/Hair001
+      FirstPersonFlag: 0
