@@ -64,7 +64,12 @@ public class RequestTest : MonoBehaviour
             assistant.StopThinking();
 
             string savePath = Path.Combine(Application.streamingAssetsPath, "voice.wav");
-            File.WriteAllBytes(savePath, request.downloadHandler.data);
+            byte[] audioBytes = request.downloadHandler.data;
+            string expression = request.GetResponseHeader("Expression");
+
+            assistant.SetExpressionString(expression);
+
+            File.WriteAllBytes(savePath, audioBytes);
             Debug.Log("Voice file downloaded and saved at " + savePath);
 
             StartCoroutine(assistant.GetAudioFile());

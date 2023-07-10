@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class Assistant : MonoBehaviour
 {
     [SerializeField] private int speakerID = 20;
+    [SerializeField] private string expression = "Neutral";
     private AudioSource audioSource;
     private Animator anim;
 
@@ -14,6 +15,7 @@ public class Assistant : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
+
     public IEnumerator GetAudioFile()
     {
         Debug.Log("Getting Audio File!");
@@ -28,6 +30,9 @@ public class Assistant : MonoBehaviour
             audioClip.name = "voice";
             audioSource.clip = audioClip;
             audioSource.Play();
+
+            // Expression
+            SetExpression();
         }
         else
         {
@@ -48,5 +53,33 @@ public class Assistant : MonoBehaviour
     public void StopThinking()
     {
         anim.SetBool("isThinking", false);
+    }
+
+    public void SetExpressionString(string exp)
+    {
+        expression = exp;
+    }
+
+    public void SetExpression()
+    {
+        ResetExpression();
+        
+        if(expression == "Neutral")
+        {
+            return;
+        }
+
+        anim.SetLayerWeight(anim.GetLayerIndex("Eye Blinking"), 0f); // Stop Blinking while showing facial expressions
+        anim.SetBool(expression, true);
+    }
+
+    public void ResetExpression()
+    {
+        anim.SetBool("Angry", false);
+        anim.SetBool("Joy", false);
+        anim.SetBool("Sorrow", false);
+        anim.SetBool("Surprised", false);
+
+        anim.SetLayerWeight(anim.GetLayerIndex("Eye Blinking"), 1f); // Blink
     }
 }
