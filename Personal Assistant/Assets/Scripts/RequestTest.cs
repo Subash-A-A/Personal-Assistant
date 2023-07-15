@@ -7,6 +7,7 @@ using TMPro;
 public class RequestTest : MonoBehaviour
 {
     [SerializeField] private TMP_InputField input;
+    [SerializeField] private string lang = "en";
 
     private Assistant assistant;
     private Coroutine postCoroutine = null;
@@ -16,6 +17,8 @@ public class RequestTest : MonoBehaviour
     {
         public string message;
         public int speakerID;
+        public string srcLang;
+        public string streamingAssetsPath;
     }
     private void Awake()
     {
@@ -24,11 +27,13 @@ public class RequestTest : MonoBehaviour
 
     public void Request()
     {
+        /*
         if(input.text == null || input.text == "")
         {
             Debug.Log("Please Enter some Prompt");
             return;
         }
+        */
 
         Debug.Log("Submit!");
         postCoroutine = StartCoroutine(PostAPIRequest());
@@ -43,6 +48,8 @@ public class RequestTest : MonoBehaviour
         Data data = new Data();
         data.message = input.text;
         data.speakerID = assistant.GetSpeakerID();
+        data.srcLang = lang;
+        data.streamingAssetsPath = Application.streamingAssetsPath;
 
         // Convert the Data object to JSON
         string jsonData = JsonUtility.ToJson(data);
@@ -61,17 +68,11 @@ public class RequestTest : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
+            Debug.Log("Recieved Data!");
+            
             assistant.StopThinking();
-
-            string savePath = Path.Combine(Application.streamingAssetsPath, "voice.wav");
-            byte[] audioBytes = request.downloadHandler.data;
             string expression = request.GetResponseHeader("Expression");
-
             assistant.SetExpressionString(expression);
-
-            File.WriteAllBytes(savePath, audioBytes);
-            Debug.Log("Voice file downloaded and saved at " + savePath);
-
             StartCoroutine(assistant.GetAudioFile());
         }
         else
