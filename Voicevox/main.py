@@ -53,6 +53,8 @@ def post_data():
 
     # Set the response headers
     response.headers.set('Expression', expression)
+    response.headers.set('Prompt', message)
+    response.headers.set('Reply', gpt_answer["answer_en"])
 
     # Return the voice file as a response
     return response

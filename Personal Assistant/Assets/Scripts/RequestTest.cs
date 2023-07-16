@@ -1,8 +1,8 @@
-using System.Collections;
-using System.IO;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
+using UnityEditor.Rendering;
 
 public class RequestTest : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class RequestTest : MonoBehaviour
 
     private Assistant assistant;
     private Coroutine postCoroutine = null;
+    private DialogUI dialog;
 
     [System.Serializable]
     public class Data
@@ -23,6 +24,7 @@ public class RequestTest : MonoBehaviour
     private void Awake()
     {
         assistant = FindObjectOfType<Assistant>();
+        dialog = GetComponent<DialogUI>();
     }
 
     public void Request()
@@ -36,6 +38,7 @@ public class RequestTest : MonoBehaviour
         */
 
         Debug.Log("Submit!");
+        dialog.SetDialog("Yuki is Thinking...");
         postCoroutine = StartCoroutine(PostAPIRequest());
     }
 
@@ -72,12 +75,22 @@ public class RequestTest : MonoBehaviour
             
             assistant.StopThinking();
             string expression = request.GetResponseHeader("Expression");
+            string prompt = request.GetResponseHeader("Prompt");
+            string reply = request.GetResponseHeader("Reply");
+
+            Debug.Log("Prompt: " + prompt);
+            Debug.Log("Reply: " + reply);
+
+            string dialogText = dialog.FormatDialog(prompt, reply);
+            dialog.SetDialog(dialogText);
+
             assistant.SetExpressionString(expression);
             StartCoroutine(assistant.GetAudioFile());
         }
         else
         {
             Debug.Log(request.error);
+            dialog.SetDialog(request.error, true);
         }
     }
 }

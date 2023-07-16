@@ -1,5 +1,6 @@
 using System.Collections;
 using System.IO;
+using uLipSync;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -7,8 +8,10 @@ public class Assistant : MonoBehaviour
 {
     [SerializeField] private int speakerID = 20;
     [SerializeField] private string expression = "Neutral";
+
     private AudioSource audioSource;
     private Animator anim;
+    private Coroutine expressionCoroutine = null;
 
     private void Start()
     {
@@ -30,9 +33,14 @@ public class Assistant : MonoBehaviour
             audioClip.name = "voice";
             audioSource.clip = audioClip;
             audioSource.Play();
+            float length = audioSource.clip.length;
 
             // Expression
-            SetExpression();
+            if(expressionCoroutine != null)
+            {
+                StopCoroutine(expressionCoroutine);
+            }
+            expressionCoroutine = StartCoroutine(SetExpressionCoroutine(length));
         }
         else
         {
@@ -60,11 +68,16 @@ public class Assistant : MonoBehaviour
         expression = exp;
     }
 
+    public IEnumerator SetExpressionCoroutine(float time)
+    {
+        SetExpression();
+        yield return new WaitForSeconds(time);
+        ResetExpression();
+    }
+
     public void SetExpression()
     {
-        ResetExpression();
-        
-        if(expression == "Neutral")
+        if (expression == "Neutral")
         {
             return;
         }
@@ -79,6 +92,7 @@ public class Assistant : MonoBehaviour
         anim.SetBool("Joy", false);
         anim.SetBool("Sorrow", false);
         anim.SetBool("Surprised", false);
+        anim.SetBool("Fun", false);
 
         anim.SetLayerWeight(anim.GetLayerIndex("Eye Blinking"), 1f); // Blink
     }

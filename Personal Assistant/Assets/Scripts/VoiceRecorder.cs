@@ -1,25 +1,31 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class VoiceRecorder : MonoBehaviour
 {
-    [SerializeField] private KeyCode recordKey = KeyCode.Space;
-    [SerializeField] private Image innerCircle;
+    [SerializeField] private KeyCode key;
+    [SerializeField] private GameObject recordingUI;
 
     private RequestTest requestTest;
     private Coroutine record = null;
     private bool isRecording = false;
+    private DialogUI dialog;
 
     private void Awake()
     {
         requestTest = GetComponent<RequestTest>();
+        dialog = GetComponent<DialogUI>();
+    }
+
+    private void Start()
+    {
+        recordingUI.SetActive(isRecording);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(recordKey))
+        if ((Input.GetKeyDown(key) && !isRecording) || (Input.GetKeyUp(key) && isRecording))
         {
             if(record != null)
             {
@@ -29,7 +35,10 @@ public class VoiceRecorder : MonoBehaviour
             record = StartCoroutine(MakeGetRequest());
         }
 
-        innerCircle.color = (isRecording) ? Color.red : Color.white;
+        if (isRecording)
+        {
+            dialog.SetDialog("Yuki is Listening!");
+        }
     }
 
     IEnumerator MakeGetRequest()
@@ -45,6 +54,7 @@ public class VoiceRecorder : MonoBehaviour
             // Request succeeded, you can process the response here
             Debug.Log("Response: " + request.downloadHandler.text);
             isRecording = !isRecording;
+            recordingUI.SetActive(isRecording);
 
             if (!isRecording)
             {
