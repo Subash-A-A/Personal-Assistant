@@ -2,6 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+
+node_modules
+.env
+.vscode
+__pycache__
+.wav
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/

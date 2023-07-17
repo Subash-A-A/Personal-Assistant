@@ -7,11 +7,11 @@ _ = load_dotenv(find_dotenv())
 key = os.getenv('OPENAI_API_KEY')
 openai.api_key = key
 
-behaviour = '''
+BEHAVIOUR = '''
 You are Yuki! A Japanese anime style personal assistant.
 '''
 
-user_init = '''
+USER_INIT = '''
 You are Yuki! A Japanese anime style personal assistant.
 While speaking you talk like a rugged Japanese girl!
 Keep your answers short and brief, preferably less than 30 words!
@@ -23,7 +23,7 @@ tone: "The tone in which you reply (Neutral, Joy, Angry, Sorrow, Surprised, Fun)
 }
 '''
 
-assistant_init = '''
+ASSISTANT_INIT = '''
 {
 "answer_en": "Hey there! I'm Yuki, your rugged anime-style assistant. What can I do for ya?",
 "tone": "Joy"
@@ -32,9 +32,9 @@ assistant_init = '''
 
 
 messages = [
-    {"role": "system", "content": behaviour},
-    {"role": "user", "content": user_init},
-    {"role": "assistant", "content": assistant_init},
+    {"role": "system", "content": BEHAVIOUR},
+    {"role": "user", "content": USER_INIT},
+    {"role": "assistant", "content": ASSISTANT_INIT},
 ]
 
 
