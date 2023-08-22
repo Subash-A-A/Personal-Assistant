@@ -9,11 +9,15 @@ public class CanvasFixer : MonoBehaviour
         public float posY;
     }
 
+    [SerializeField] private bool enableFixer = true;
     [SerializeField] private CanvasElement[] canvasElements;
 
     private void Awake()
     {
-        FixYPos();
+        if (enableFixer)
+        {
+            FixYPos();
+        }
     }
 
     private void FixYPos()

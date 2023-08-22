@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
 using UnityEditor.Rendering;
+using static System.Net.WebRequestMethods;
 
 public class RequestTest : MonoBehaviour
 {
@@ -42,7 +43,14 @@ public class RequestTest : MonoBehaviour
         postCoroutine = StartCoroutine(PostAPIRequest());
     }
 
-    IEnumerator PostAPIRequest()
+    public void RequestViaTextInput()
+    {
+        Debug.Log("Submit!");
+        dialog.SetDialog("Yuki is Thinking...");
+        postCoroutine = StartCoroutine(PostAPIRequest(true));
+    }
+
+    IEnumerator PostAPIRequest(bool isInputText=false)
     {
         //Animation
         assistant.StartThinking();
@@ -61,7 +69,8 @@ public class RequestTest : MonoBehaviour
         byte[] postData = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
         // Create and configure the request
-        UnityWebRequest request = new UnityWebRequest("http://localhost:5000/speak", "POST");
+        string postUrl = isInputText ? "http://localhost:5000/speak_text" : "http://localhost:5000/speak";
+        UnityWebRequest request = new UnityWebRequest(postUrl, "POST");
         request.uploadHandler = new UploadHandlerRaw(postData);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");

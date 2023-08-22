@@ -53,5 +53,37 @@ def post_data():
     return response
 
 
+@app.route('/speak_text', methods=['POST'])
+def post_data_text():
+    # Retrieve the JSON data from the request body
+    data = request.get_json()
+    lang = data.get('srcLang')
+    speakerID = data.get('speakerID')
+    streamingAssetsPath = data.get('streamingAssetsPath')
+    textInput = data.get('message')
+
+    # Convert user text from any language to english
+    message = lang_to_en(textInput, src=lang)
+
+    # Generate reply to user's question
+    gpt_answer = get_completion(message)
+
+    # Translate response to japanese
+    jp_text = en_to_japanese(gpt_answer["answer_en"])
+    expression = gpt_answer["tone"]
+    asyncio.run(voice.speak(jp_text, streamingAssetsPath, speaker=speakerID))
+
+    # Response
+    response = make_response()
+
+    # Set the response headers
+    response.headers.set('Expression', expression)
+    response.headers.set('Prompt', message)
+    response.headers.set('Reply', gpt_answer["answer_en"])
+
+    # Return the voice file as a response
+    return response
+
+
 if __name__ == '__main__':
     app.run()
