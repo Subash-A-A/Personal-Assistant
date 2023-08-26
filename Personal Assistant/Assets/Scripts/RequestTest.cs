@@ -2,17 +2,18 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
-using UnityEditor.Rendering;
-using static System.Net.WebRequestMethods;
+
 
 public class RequestTest : MonoBehaviour
 {
     [SerializeField] private TMP_InputField input;
     [SerializeField] private string lang = "en";
 
+    private bool isThinking = false;
     private Assistant assistant;
     private Coroutine postCoroutine = null;
     private DialogUI dialog;
+    private ChatManager chatManager;
 
     [System.Serializable]
     public class Data
@@ -26,17 +27,12 @@ public class RequestTest : MonoBehaviour
     {
         assistant = FindObjectOfType<Assistant>();
         dialog = GetComponent<DialogUI>();
+        chatManager = GetComponent<ChatManager>();
     }
 
     public void Request()
     {
-        /*
-        if(input.text == null || input.text == "")
-        {
-            Debug.Log("Please Enter some Prompt");
-            return;
-        }
-        */
+        if (isThinking) return;
 
         Debug.Log("Submit!");
         dialog.SetDialog("Yuki is Thinking...");
@@ -45,6 +41,14 @@ public class RequestTest : MonoBehaviour
 
     public void RequestViaTextInput()
     {
+        if (isThinking) return;
+
+        if (input.text == null || input.text == "")
+        {
+            Debug.Log("Please Enter some Prompt");
+            return;
+        }
+
         Debug.Log("Submit!");
         dialog.SetDialog("Yuki is Thinking...");
         postCoroutine = StartCoroutine(PostAPIRequest(true));
@@ -52,7 +56,8 @@ public class RequestTest : MonoBehaviour
 
     IEnumerator PostAPIRequest(bool isInputText=false)
     {
-        //Animation
+        // Yuki is Thinking!
+        isThinking = true;
         assistant.StartThinking();
 
         // Create a Data object and populate it with the desired values
@@ -61,6 +66,8 @@ public class RequestTest : MonoBehaviour
         data.speakerID = assistant.GetSpeakerID();
         data.srcLang = lang;
         data.streamingAssetsPath = Application.streamingAssetsPath;
+
+        chatManager.AppedUserMessage(data.message); // Append UserInput to Chat
 
         // Convert the Data object to JSON
         string jsonData = JsonUtility.ToJson(data);
@@ -78,6 +85,9 @@ public class RequestTest : MonoBehaviour
         // Send the request and wait for the response
         yield return request.SendWebRequest();
 
+        // Got the response, Now stop thinking!
+        isThinking = false;
+
         if (request.result == UnityWebRequest.Result.Success)
         {
             Debug.Log("Recieved Data!");
@@ -89,6 +99,8 @@ public class RequestTest : MonoBehaviour
 
             Debug.Log("Prompt: " + prompt);
             Debug.Log("Reply: " + reply);
+
+            chatManager.AppedAIMessage(reply); // Append AI's message
 
             string dialogText = dialog.FormatDialog(prompt, reply);
             dialog.SetDialog(dialogText);
