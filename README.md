@@ -6,4 +6,4 @@ Yuki is an anime style Personal Chatbot
 – Talk to the assistant using a microphone or by simply providing text prompts.  
 – Technology Used: Unity, REST APIs, Python, ChatGPT API, Prompt Engineering.
 
-<img src="img.png" width="600" >
+<img src="img.png" alt="Yuki Image">
