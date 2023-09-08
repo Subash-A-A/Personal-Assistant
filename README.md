@@ -13,7 +13,7 @@ Yuki is an anime style Personal Chatbot
 ```bash
   OPENAI_API_KEY="Your API key here"
 ```
-3. Voicevox engine is required. You can download it [here]([https://www.google.com](https://github.com/VOICEVOX/voicevox_engine/releases/tag/0.15.0-preview.4)https://github.com/VOICEVOX/voicevox_engine/releases/tag/0.15.0-preview.4)
+3. Voicevox engine is required. You can download it [here](https://github.com/VOICEVOX/voicevox_engine/releases/)
 4. Run Voicevox engine by launching run.exe
 5. Run the server by typing the following command
 ```bash
