@@ -21,5 +21,5 @@ Yuki is an anime style Personal Chatbot
 ```
 6. Launch the assistant and engage in a conversation 😉!
 
-<img src="img.png" alt="Yuki Image">
+<img src="img.png" alt="Yuki Image" />
 ![1](https://github.com/Subash-A-A/Personal-Assistant/assets/83503341/f27cdca6-7f70-4fe7-8fb0-e80a4e9f4fe2)
