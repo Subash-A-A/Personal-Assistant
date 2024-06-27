@@ -8,7 +8,7 @@ Yuki is an anime style Personal Chatbot
 
 ## Installation and Usage
 
-1. Clone this repo.
+1. Clone this repo, add the Personal Assistant directory in your Unity Project
 2. Create a .env file inside the "server" directory and enter your openai api key
 ```bash
   OPENAI_API_KEY="Your API key here"
